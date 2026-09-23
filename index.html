@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salesforce Integrated CRM Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <!-- Polar Bear Logo -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: var(--primary);">
+          <!-- Head -->
+          <circle cx="12" cy="13" r="7" fill="rgba(37, 99, 235, 0.05)" />
+          <!-- Left Ear -->
+          <circle cx="6.5" cy="7.5" r="2.5" fill="white" stroke="currentColor" stroke-width="2" />
+          <circle cx="6.5" cy="7.5" r="1" fill="currentColor" />
+          <!-- Right Ear -->
+          <circle cx="17.5" cy="7.5" r="2.5" fill="white" stroke="currentColor" stroke-width="2" />
+          <circle cx="17.5" cy="7.5" r="1" fill="currentColor" />
+          <!-- Eyes -->
+          <circle cx="9.5" cy="11.5" r="1" fill="currentColor" />
+          <circle cx="14.5" cy="11.5" r="1" fill="currentColor" />
+          <!-- Snout/Muzzle -->
+          <ellipse cx="12" cy="15" rx="2.2" ry="1.6" fill="white" stroke="currentColor" stroke-width="1.5" />
+          <!-- Nose -->
+          <polygon points="11,14.3 13,14.3 12,15.1" fill="currentColor" />
+          <!-- Mouth -->
+          <path d="M12 15.5v0.8m-0.8 0h1.6" />
+        </svg>
+        <span class="logo-text">CRM</span>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <div class="nav-item active" data-view="dashboard" onclick="window.appRouter('dashboard')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          Analytics Dashboard
+        </div>
+        
+        <div class="nav-item" data-view="leads" onclick="window.appRouter('leads')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Customer Leads
+        </div>
+        
+        <div class="nav-item" data-view="deals" onclick="window.appRouter('deals')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Deals Pipeline
+        </div>
+        
+        <div class="nav-item" data-view="automation" onclick="window.appRouter('automation')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Workflows Engine
+        </div>
+        
+        <div class="nav-item" data-view="salesforce" onclick="window.appRouter('salesforce')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+          Salesforce Portal
+        </div>
+        
+        <div class="nav-item" data-view="docs" onclick="window.appRouter('docs')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          Verification & Help
+        </div>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div>App Version: 1.0.0 (Light)</div>
+        <div>Salesforce API v58.0</div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Container -->
+    <main class="main-content">
+      
+      <!-- Top Title and Status Header -->
+      <header class="top-header">
+        <div class="header-title-area">
+          <h2 id="header-view-title">CRM Analytics Dashboard</h2>
+        </div>
+        
+        <div class="header-actions">
+          <div id="header-sf-status" class="sf-status-badge disconnected">
+            <span class="indicator-dot"></span>
+            Disconnected
+          </div>
+        </div>
+      </header>
+
+      <!-- Dynamic Component View Ports -->
+      <div id="view-dashboard" class="view-panel active"></div>
+      <div id="view-leads" class="view-panel"></div>
+      <div id="view-deals" class="view-panel"></div>
+      <div id="view-automation" class="view-panel"></div>
+      <div id="view-salesforce" class="view-panel"></div>
+      <div id="view-docs" class="view-panel"></div>
+    </main>
+  </div>
+
+  <!-- Shared Modal Box Frame Overlay -->
+  <div id="modal-container" class="modal-overlay"></div>
+
+  <!-- Import State Store and Modular Components -->
+  <script src="js/store.js"></script>
+  <script src="js/components/dashboard.js"></script>
+  <script src="js/components/leads.js"></script>
+  <script src="js/components/deals.js"></script>
+  <script src="js/components/salesforce.js"></script>
+  <script src="js/components/automation.js"></script>
+  <script src="js/components/docs.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
